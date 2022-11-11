@@ -1,0 +1,68 @@
+{% extends 'app.html' %} {% load static %} {% block header %}
+<title>JBerry | Login Page</title>
+<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
+{% endblock header %} {% block mainbody %}
+<div class="container mt-5">
+  <div class="card">
+    <div class="card-header mb-3">
+      <h2 class="text text-primary text-center">User Login Page</h2>
+    </div>
+    <div class="form-body container">
+      {% if message %}
+      <h3>{{message}}</h3>
+      {% endif %}
+      <form class="container" action="{% url 'login' %}" method="post">
+        {% csrf_token %}
+
+        <div class="form-group row">
+          <label for="email" class="col-sm-2 col-form-label"
+            >Enter Your User Name</label
+          >
+          <div class="col-sm-10">
+            <input
+              type="text"
+              name="username"
+              class="form-control"
+              id="email"
+              placeholder="Enter Your User Name"
+            />
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="password" class="col-sm-2 col-form-label"
+            >Give Your Password</label
+          >
+          <div class="col-sm-10">
+            <input
+              type="password"
+              name="password"
+              class="form-control"
+              id="password"
+              placeholder="***"
+            />
+          </div>
+        </div>
+
+        <input class="btn btn-info mb-5" type="submit" value="Login" />
+      </form>
+      {% if success %}
+      <div class="card-footer">
+        <div class="alert alert-success">
+          <h4 class="text-center">{{success}}</h4>
+        </div>
+      </div>
+      {% endif %} {% if error %}
+      <div class="alert alert-danger">
+        <h5 class="text-center">{{error}}</h5>
+      </div>
+      {% endif %} {% if credentialerror %}
+      <div class="alert alert-danger">
+        <h5 class="text-center">{{credentialerror}}</h5>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{% endblock mainbody %}
